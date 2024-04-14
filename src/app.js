@@ -1,8 +1,10 @@
 const express = require('express');
-
-// ...
+const loginRouter = require('./routes/Login.route');
 
 const app = express();
+app.use(express.json());
+
+app.use('/login', loginRouter);
 
 // não remova ou mova esse endpoint
 app.get('/', (_request, response) => {
