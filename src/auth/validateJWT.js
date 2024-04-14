@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { UserService } = require('../services/User.service');
+const UserService = require('../services/User.service');
 
 const secret = process.env.JWT_SECRET;
 
@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, secret);
 
-    const user = await UserService.getByUserId(decoded.payload.id);
+    const user = await UserService.getAllUsers(decoded.payload.id);
 
     if (!user) {
       return res.status(401).json({ message: 'Erro ao procurar usuário do token' });

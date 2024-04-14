@@ -1,11 +1,11 @@
-const { createUser } = require('../services/User.service');
+const userService = require('../services/User.service');
 const { generateToken, secretToken, jwtConfig } = require('../utils/GenerateToken');
 
 const register = async (req, res) => {
   try {
     const { displayName, email, password, image } = req.body;
 
-    const newUser = await createUser({ displayName, email, password, image });
+    const newUser = await userService.createUser({ displayName, email, password, image });
 
     const tokenPayload = {
       id: newUser.id,
@@ -23,4 +23,17 @@ const register = async (req, res) => {
   }
 };
 
-module.exports = { register };
+const getAll = async (_req, res) => {
+  try {
+    const users = await userService.getAllUsers();
+    return res.status(200).json(users);
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).json({ message: 'Ocorreu um erro' });
+  }
+};
+
+module.exports = {
+  register,
+  getAll,
+};

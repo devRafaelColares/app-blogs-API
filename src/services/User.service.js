@@ -20,7 +20,21 @@ const createUser = async (userData) => {
   }
 };
 
+const getAllUsers = async () => {
+  try {
+    const users = await User.findAll(
+      { attributes: { exclude: ['password'] } },
+    );
+  
+    return users;
+  } catch (error) {
+    console.error('Error fetching all users:', error);
+    throw error;
+  }
+};
+
 module.exports = {
   getByEmail,
   createUser,
+  getAllUsers,
 };
