@@ -10,6 +10,17 @@ const getByEmail = async (email) => {
   }
 };
 
+const createUser = async (userData) => {
+  try {
+    const user = await User.create(userData);
+    return user;
+  } catch (error) {
+    console.error('Error creating user:', error);
+    throw error;
+  }
+};
+
 module.exports = {
   getByEmail,
+  createUser,
 };

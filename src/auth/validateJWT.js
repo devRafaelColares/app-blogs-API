@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
   const bearerToken = req.header('Authorization');
 
   if (!bearerToken) {
-    return res.status(401).json({ error: 'Token não encontrado' });
+    return res.status(401).json({ message: 'Token not found' });
   }
 
   const token = extractToken(bearerToken);
@@ -29,6 +29,6 @@ module.exports = async (req, res, next) => {
 
     next();
   } catch (err) {
-    return res.status(401).json({ message: 'Token inválido' });
+    return res.status(401).json({ message: 'Expired or invalid token' });
   }
 };
