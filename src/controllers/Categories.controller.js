@@ -3,10 +3,6 @@ const categoryService = require('../services/Category.service');
 const createCategory = async (req, res) => {
   const { name } = req.body;
 
-  if (!name) {
-    return res.status(400).json({ message: '"name" is required' });
-  }
-
   try {
     const newCategory = await categoryService.createNewCategory(name);
 
@@ -17,6 +13,12 @@ const createCategory = async (req, res) => {
   }
 };
 
+const getAllCategories = async (_req, res) => {
+  const allCategories = await categoryService.getAllCategories();
+  res.status(200).json(allCategories);
+};
+
 module.exports = {
   createCategory,
+  getAllCategories,
 };
