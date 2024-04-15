@@ -12,6 +12,12 @@ route.get(
   userController.getAll,
 );
 
+route.get(
+  '/:id',
+  validateJWT,
+  userController.getById,
+);
+
 route.post(
   '/',
   validateUserData,
